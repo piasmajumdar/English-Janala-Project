@@ -1,3 +1,9 @@
+const createElements = (arr) => {
+    const htmlElements = arr.map(el => `<span class="btn">${el}</span>`);
+    // console.log(...htmlElements);
+    return(htmlElements.join(" "));
+}
+
 const loadLessions = () => {
     const url = "https://openapi.programming-hero.com/api/levels/all";
     fetch(url) // promise of response
@@ -25,6 +31,55 @@ const loadLevelWord = (id) => {
         })
 };
 
+
+// {
+//     "word": "Tranquil",
+//     "meaning": "শান্ত / নিরিবিলি",
+//     "pronunciation": "ট্রাঙ্কুইল",
+//     "level": 6,
+//     "sentence": "The park was a tranquil place to relax.",
+//     "points": 4,
+//     "partsOfSpeech": "adjective",
+//     "synonyms": [
+//         "peaceful",
+//         "calm",
+//         "serene"
+//     ],
+//     "id": 20
+// }
+const loadWordDetail = async(id)=>{
+    const url = `https://openapi.programming-hero.com/api/word/${id}`;
+    console.log(url);
+    const res = await fetch(url);
+    const details = await res.json();
+    displayWordDetails(details.data);
+}
+const displayWordDetails = (word)=> {
+    console.log(word);
+    const detailsContainer = document.getElementById('details-container');
+    detailsContainer.innerHTML = `
+                <div class="">
+                    <h2 class="text-2xl font-bold">
+                        ${word.word} (<i class="fa-solid fa-microphone-lines"></i>:${word.pronunciation})
+                    </h2>
+                </div>
+                <div class="">
+                    <h2 class="font-bold">Meaning</h2>
+                    <p>${word.meaning}</p>
+                </div>
+                <div class="">
+                    <h2 class="font-bold">Example</h2>
+                    <p>${word.sentence}</p>
+                </div>
+                <div class="">
+                    <h2 class="font-bold">Synonym</h2>
+                    <div class="">${createElements(word.synonyms)}</div>
+                </div>
+    `;
+    document.getElementById("word_modal").showModal();
+
+}
+
 const displayLevelWord = (words) => {
     const wordContainer = document.getElementById("word-container");
     wordContainer.innerHTML = '';
@@ -47,7 +102,7 @@ const displayLevelWord = (words) => {
     //     "pronunciation": "মীগার"
     // }
     words.forEach(word => {
-        console.log(word)
+        // console.log(word)
         const card = document.createElement('div');
         card.innerHTML = `
         <div class="bg-white rounded-xl shadow-sm text-center py-10 px-5 space-y-4">
@@ -55,7 +110,7 @@ const displayLevelWord = (words) => {
             <p class="font-semibold">Meaning/Pronunciation</p>
             <div class="text-2xl font-semibold font-bangla text-gray-700">"${word.meaning ? word.meaning : "অর্থ পাওয়া যায়নি"} / ${word.pronunciation ? word.pronunciation : "Pronunciation পাওয়া যায় নি"} "</div>
             <div class="flex justify-between items-center">
-                <button class="btn bg-[#1A91FF]/10 hover:bg-[#1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
+                <button onclick="loadWordDetail(${word.id})" class="btn bg-[#1A91FF]/10 hover:bg-[#1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
