@@ -154,7 +154,6 @@ const displayLesson = (lessons) => {
     }
 }
 
-loadLessons();
 
 document.getElementById("btn-search").addEventListener('click', ()=>{
     removeActive();
@@ -172,3 +171,6 @@ document.getElementById("btn-search").addEventListener('click', ()=>{
 
     })
 })
+
+
+loadLessons();
