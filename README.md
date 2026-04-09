@@ -46,7 +46,7 @@ The app focuses on **API integration, dynamic UI rendering, and real user intera
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/vocabulary-learning-app.git
+git clone [https://github.com/your-username/vocabulary-learning-app.git](https://github.com/piasmajumdar/English-Janala-Project.git)
 
 # Go to project directory
 cd vocabulary-learning-app
