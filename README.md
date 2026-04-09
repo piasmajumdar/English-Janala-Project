@@ -49,7 +49,7 @@ The app focuses on **API integration, dynamic UI rendering, and real user intera
 git clone [https://github.com/your-username/vocabulary-learning-app.git](https://github.com/piasmajumdar/English-Janala-Project.git)
 
 # Go to project directory
-cd vocabulary-learning-app
+cd English-Janala-Project
 
 # Open with live server (VS Code recommended)
 # OR simply open index.html in browser
